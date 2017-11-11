@@ -1,0 +1,51 @@
+version: "3.3"
+
+services:
+
+
+  hello-world:
+    image: wanderley/hello-world:2017
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      - GREAT_MESSAGE=Hello Fatec Dev Day ;)
+    secrets:
+      - source: GREAT_V1_SECRET
+        target: GREAT_SECRET
+    ports:
+     - "80:3000"
+    networks:
+      - network
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 30s
+        failure_action: rollback
+        monitor: 2m
+        max_failure_ratio: 0.5
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 1m
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+
+networks:
+  network:
+    external: no
+    driver: overlay
+
+
+secrets:
+  GREAT_V1_SECRET:
+    external: yes

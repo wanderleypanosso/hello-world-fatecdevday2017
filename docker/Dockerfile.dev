@@ -1,0 +1,24 @@
+# ========================== Base Image ==========================
+FROM alpine:3.4 AS base
+
+LABEL maintainer="wanderley.panosso@gmail.com"
+
+RUN apk add --no-cache nodejs
+
+
+# ========================== Development Image ===================
+FROM base AS development
+
+RUN mkdir -p /hello-world
+
+WORKDIR /hello-world
+
+EXPOSE 3000
+
+EXPOSE 5860
+
+COPY ./package.json /hello-world/package.json
+
+RUN npm install
+
+ENTRYPOINT npm run dev

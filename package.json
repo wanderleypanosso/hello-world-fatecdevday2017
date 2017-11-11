@@ -1,0 +1,23 @@
+{
+  "name": "fatecdevday2017-docker",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/bin/www",
+    "dev": "./node_modules/.bin/nodemon ./src/index.js --legacy-watch -e js,json,env,sh,css,jade --ignore lib/ --debug=5860",
+    "test": "echo \"Warning: no test specified\" && exit 0"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
+

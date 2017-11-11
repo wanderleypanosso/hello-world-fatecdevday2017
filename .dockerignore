@@ -1,0 +1,5 @@
+**/**
+!docker/config
+!src
+!package.json
+
